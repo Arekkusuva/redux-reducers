@@ -1,0 +1,10 @@
+{
+  "name": "redux-reducers",
+  "version": "1.0.0",
+  "description": "Redux reducer, actionTypes and actionCreators in one function.",
+  "keywords": ["redux", "reducers", "actions", "react", "native"],
+  "main": "index.js",
+  "repository": "git@github.com:Arekkusuva/redux-reducers.git",
+  "author": "Arekkusuva <arekkusuchar@gmail.com>",
+  "license": "MIT"
+}
