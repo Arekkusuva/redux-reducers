@@ -16,9 +16,6 @@
   },
   "author": "Arekkusuva <arekkusuchar@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "redux": "^3.7.2"
-  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
