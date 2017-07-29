@@ -10,7 +10,10 @@
     "native"
   ],
   "main": "index.js",
-  "repository": "git@github.com:Arekkusuva/redux-reducers.git",
+  "repository": {
+    "url": "https://github.com/Arekkusuva/redux-reducers.git",
+    "type": "git"
+  },
   "author": "Arekkusuva <arekkusuchar@gmail.com>",
   "license": "MIT",
   "dependencies": {
