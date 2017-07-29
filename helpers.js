@@ -5,8 +5,10 @@
  * @flow
  */
 
+
 /**
- * Get actionCreator name
+ * getActionCreatorName
+ * @description Get actionCreator name.
  * @param actionType {string} - Action type.
  * @returns {string}
  */
