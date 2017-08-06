@@ -11,7 +11,7 @@ import { getActionCreatorName } from './helpers';
  * createReducer
  * @description Create reducer, actionTypes and actionCreators.
  * @example
- *  const { actionTypes, actionCreators, reducer } = createReducer(
+ *  export default createReducer(
  *    'user',
  *    { email: '' },
  *    {
@@ -22,17 +22,17 @@ import { getActionCreatorName } from './helpers';
  *       'SAVE': null,
  *       ...etc.
  *    }
- *  )
- * @param storeName - Must begin with a lowercase character.
+ *  );
+ * @param reducerName - Must begin with a lowercase character.
  * @param initialState {Object}
  * @param configData {Object} - { 'ACTION_TYPE_NAME': Function or null }
  * @returns {{ actionTypes: Object, actionCreators: Object, reducer: Function }}
  */
-export const createReducer = (storeName: string, initialState?: Object = {}, configData?: Object = {}) => {
+export const createReducer = (reducerName: string, initialState?: Object = {}, configData?: Object = {}) => {
   const actionTypes: Object = {};
   const actionCreator = (actionTypeName, payload) => ({ type: actionTypeName, payload });
-  const setterActionName: string = `set${storeName.charAt(0).toUpperCase()}${storeName.slice(1)}`;
-  const setterActionCreatorName = `${storeName}/${setterActionName}`;
+  const setterActionName: string = `set${reducerName.charAt(0).toUpperCase()}${reducerName.slice(1)}`;
+  const setterActionCreatorName = `${reducerName}/${setterActionName}`;
   const actionCreators: Object = {
     [setterActionName]: payload => actionCreator(setterActionCreatorName, payload),
   };
@@ -42,7 +42,7 @@ export const createReducer = (storeName: string, initialState?: Object = {}, con
   Object.keys(configData).forEach((actionType) => {
     const actionCreatorName: string = getActionCreatorName(actionType);
     if (setterActionName !== actionCreatorName) {
-      const actionTypeName = `${storeName}/${actionCreatorName}`;
+      const actionTypeName = `${reducerName}/${actionCreatorName}`;
       if (typeof configData[actionType] === 'function') {
         tmpActionTypesHandlers[actionTypeName] = configData[actionType];
       }
@@ -66,8 +66,25 @@ export const createReducer = (storeName: string, initialState?: Object = {}, con
   };
 
   return {
+    reducerName,
     actionTypes,
     actionCreators,
     reducer,
   };
+};
+
+/**
+ * mixReducers
+ * @description Combine redux usual reducers and reducers created by this library.
+ * @param combiner {Function}
+ * @param mixedReducers {Array}
+ * @returns {*}
+ */
+export const mixReducers = (combiner: Function, mixedReducers: ?Array<Object>) => {
+  const reducers: Object = {};
+  mixedReducers.forEach((item) => {
+    if (typeof item === 'function') reducers[item.name] = item;
+    else if (item.reducer) reducers[item.reducerName] = item.reducer;
+  });
+  return combiner(reducers);
 };
