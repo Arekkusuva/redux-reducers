@@ -13,7 +13,7 @@
  */
 export const getActionCreatorName = (actionType: string) => {
   let actionCreatorName: string = '';
-  const tmpArray: Array = `${actionType}`.split('_');
+  const tmpArray: Array<string> = `${actionType}`.split('_');
   tmpArray.forEach((word, index) => {
     if (index === 0) actionCreatorName += word.toLowerCase();
     else actionCreatorName += `${word.charAt(0)}${word.slice(1).toLowerCase()}`;
