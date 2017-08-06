@@ -74,17 +74,16 @@ export const createReducer = (reducerName: string, initialState?: Object = {}, c
 };
 
 /**
- * mixReducers
- * @description Combine redux usual reducers and reducers created by this library.
+ * combine
+ * @description Combine reducers created by this library.
  * @param combiner {Function}
- * @param mixedReducers {Array}
+ * @param reducers {Array}
  * @returns {*}
  */
-export const mixReducers = (combiner: Function, mixedReducers: ?Array<Object>) => {
+export const combine = (combiner: Function, reducers: ?Array<Object>) => {
   const reducers: Object = {};
-  mixedReducers.forEach((item) => {
-    if (typeof item === 'function') reducers[item.name] = item;
-    else if (item.reducer) reducers[item.reducerName] = item.reducer;
+  reducers.forEach((item) => {
+    if (item.reducer) reducers[item.reducerName] = item.reducer;
   });
   return combiner(reducers);
 };
