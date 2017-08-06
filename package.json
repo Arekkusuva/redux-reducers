@@ -5,23 +5,13 @@
   "keywords": [
     "redux",
     "reducers",
-    "actions",
-    "react",
-    "native"
+    "react-native"
   ],
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "url": "https://github.com/Arekkusuva/redux-reducers.git",
     "type": "git"
   },
   "author": "Arekkusuva <arekkusuchar@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-preset-es2017": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.2",
-    "eslint-plugin-import": "^2.7.0"
-  }
+  "license": "MIT"
 }
