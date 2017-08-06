@@ -80,9 +80,9 @@ export const createReducer = (reducerName: string, initialState?: Object = {}, c
  * @param reducers {Array}
  * @returns {*}
  */
-export const combine = (combiner: Function, reducers: ?Array<Object>) => {
+export const combine = (combiner: Function, reducersList: ?Array<Object>) => {
   const reducers: Object = {};
-  reducers.forEach((item) => {
+  reducersList.forEach((item) => {
     if (item.reducer) reducers[item.reducerName] = item.reducer;
   });
   return combiner(reducers);
