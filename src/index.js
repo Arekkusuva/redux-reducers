@@ -46,7 +46,7 @@ export const createReducer = (storeName: string = 'state', configData?: Object =
         tmpActionTypesHandlers[actionTypeName] = configData[actionType];
       }
       actionTypes[actionType] = actionTypeName;
-      actionCreators[getActionCreatorName(actionType)] =
+      actionCreators[actionCreatorName] =
         payload => actionCreator(actionTypeName, payload);
     }
   });
