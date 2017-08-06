@@ -1,7 +1,6 @@
 /**
  * redux-reducers
  * @author Arekkusuva <arekkusuchar@gmail.com>
- * powered by
  * @flow
  */
 
@@ -14,6 +13,7 @@ import { getActionCreatorName } from './helpers';
  * @example
  *  const { actionTypes, actionCreators, reducer } = createReducer(
  *    'user',
+ *    { email: '' },
  *    {
  *      'SET_EMAIL': (state, payload) => {
  *         // Your logic here...
@@ -24,10 +24,11 @@ import { getActionCreatorName } from './helpers';
  *    }
  *  )
  * @param storeName - Must begin with a lowercase character.
+ * @param initialState {Object}
  * @param configData {Object} - { 'ACTION_TYPE_NAME': Function or null }
  * @returns {{ actionTypes: Object, actionCreators: Object, reducer: Function }}
  */
-export const createReducer = (storeName: string = 'state', configData?: Object = {}) => {
+export const createReducer = (storeName: string, initialState?: Object = {}, configData?: Object = {}) => {
   const actionTypes: Object = {};
   const actionCreator = (actionTypeName, payload) => ({ type: actionTypeName, payload });
   const setterActionName: string = `set${storeName.charAt(0).toUpperCase()}${storeName.slice(1)}`;
@@ -50,7 +51,7 @@ export const createReducer = (storeName: string = 'state', configData?: Object =
         payload => actionCreator(actionTypeName, payload);
     }
   });
-  const reducer: Function = (state?: Object = {}, action: Object) => {
+  const reducer: Function = (state?: Object = initialState, action: Object) => {
     const tmpActionTypeHandler = tmpActionTypesHandlers[action.type];
     if (typeof tmpActionTypeHandler === 'function') {
       return () => tmpActionTypeHandler(state, action.payload);
