@@ -74,10 +74,10 @@ export const createReducer = (reducerName: string, initialState?: Object = {}, c
 };
 
 /**
- * combine
+ * Combine reducers created by "createReducer"
  * @description Combine reducers created by this library.
  * @param combiner {Function}
- * @param reducers {Array}
+ * @param reducersList {Array}
  * @returns {*}
  */
 export const combine = (combiner: Function, reducersList: ?Array<Object>) => {
