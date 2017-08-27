@@ -4,7 +4,8 @@
  * @flow
  */
 
-import { getActionCreatorName } from './helpers';
+import { getActionCreatorName, actionCreator } from './helpers';
+import { actionTypes as defaultActionTypes, defaultPayload } from './constants';
 
 
 /**
@@ -26,15 +27,24 @@ import { getActionCreatorName } from './helpers';
  * @param reducerName - Must begin with a lowercase character.
  * @param initialState {Object}
  * @param configData {Object} - { 'ACTION_TYPE_NAME': Function or null }
+ * @param resetOnClear {boolean} - Clear current state when called "clearStore"
  * @returns {{ actionTypes: Object, actionCreators: Object, reducer: Function }}
  */
-export const createReducer = (reducerName: string, initialState?: Object = {}, configData?: Object = {}) => {
-  const actionTypes: Object = {};
-  const actionCreator = (actionTypeName, payload) => ({ type: actionTypeName, payload });
+export const createReducer = (
+  reducerName: string,
+  initialState?: Object = {},
+  configData?: Object = {},
+  resetOnClear: boolean = true,
+) => {
   const setterActionName: string = `set${reducerName.charAt(0).toUpperCase()}${reducerName.slice(1)}`;
   const setterActionCreatorName = `${reducerName}/${setterActionName}`;
+  const actionTypes: Object = {
+    ...defaultActionTypes,
+    [setterActionCreatorName]: setterActionCreatorName,
+  };
   const actionCreators: Object = {
     [setterActionName]: payload => actionCreator(setterActionCreatorName, payload),
+    clearStore: () => actionCreator(defaultActionTypes.CLEAR_STORE, defaultPayload),
   };
   const tmpActionTypesHandlers: Object = {};
 
@@ -61,6 +71,8 @@ export const createReducer = (reducerName: string, initialState?: Object = {}, c
         ...state,
         ...action.payload,
       };
+    } else if (action.type === defaultActionTypes.CLEAR_STORE && resetOnClear) {
+      return initialState;
     }
     return state;
   };

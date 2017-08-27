@@ -6,7 +6,7 @@
 
 
 /**
- * getActionCreatorName
+ * Get action creator from name
  * @description Get actionCreator name.
  * @param actionType {string} - Action type.
  * @returns {string}
@@ -20,3 +20,10 @@ export const getActionCreatorName = (actionType: string) => {
   });
   return actionCreatorName;
 };
+
+/**
+ * Action creator
+ * @param actionTypeName {string}
+ * @param payload {Object}
+ */
+export const actionCreator = (actionTypeName: string, payload: Object) => ({ type: actionTypeName, payload });
