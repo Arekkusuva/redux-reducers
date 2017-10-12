@@ -64,7 +64,7 @@ export const createReducer = (
   const reducer: Function = (state?: Object = initialState, action: Object) => {
     const tmpActionTypeHandler = tmpActionTypesHandlers[action.type];
     if (typeof tmpActionTypeHandler === 'function') {
-      return () => tmpActionTypeHandler(state, action.payload);
+      return tmpActionTypeHandler(state, action.payload);
     }
     if (action.type === setterActionCreatorName) {
       return {
