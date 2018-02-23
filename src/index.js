@@ -1,6 +1,6 @@
 /**
  * redux-reducers
- * @author Arekkusuva <arekkusuchar@gmail.com>
+ * @author Arekkusuva <vuraddo@yahoo.com>
  * @flow
  */
 
