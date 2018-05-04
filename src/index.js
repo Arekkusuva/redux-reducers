@@ -94,8 +94,10 @@ export const createReducer = (
  */
 export const combine = (combiner: Function, reducersList: ?Array<Object>) => {
   const reducers: Object = {};
-  reducersList.forEach((item) => {
-    if (item.reducer) reducers[item.reducerName] = item.reducer;
-  });
+  if (reducersList) {
+      reducersList.forEach((item) => {
+        if (item.reducer) reducers[item.reducerName] = item.reducer;
+      });
+  }
   return combiner(reducers);
 };
